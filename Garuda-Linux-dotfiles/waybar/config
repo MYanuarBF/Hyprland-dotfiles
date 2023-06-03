@@ -1,0 +1,197 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 50,
+    "modules-left": [
+        "custom/launcher",
+        "clock",
+        "custom/weather",
+        "wlr/workspaces"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "network",
+        "bluetooth",
+        "temperature",
+        "custom/power_profile",
+        "battery",
+        "backlight",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "tray",
+        "custom/myhyprv",
+        "custom/light_dark",
+        "custom/power"
+    ],
+    "hyprland/window": {
+        "format": "{}"
+    },
+    "wlr/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+        }
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "wlr/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "all-output": false,
+        "active-first": true
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%A, %d %b}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": " {:%d %b, %H:%M}",
+        "format-alt": " {:%d/%m/%Y  %H:%M:%S}",
+        "interval": 1
+    },
+    "cpu": {
+        "format": "﬙ {usage: >3}%",
+        "on-click": "alacritty -e htop"
+    },
+    "memory": {
+        "interval": 10,
+        "format": " {: >3}%",
+        "on-click": "alacritty -e htop"
+    },
+    "disk": {
+        "interval": 30,
+        "format": " {free}"
+    },
+    "custom/weather": {
+        "tooltip": true,
+        "format": "{}",
+        "restart-interval": 300,
+        "exec": "~/.config/hypr/scripts/waybar-wttr.py",
+        "return-type": "json"
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C "
+    },
+    "backlight": {
+        "format": "{icon} {percent: >3}%",
+        "format-icons": [
+            "",
+            ""
+        ],
+        "on-scroll-up": "brightnessctl -c backlight set +1%",
+        "on-scroll-down": "brightnessctl -c backlight set 1%-"
+    },
+    "battery": {
+        "interval": 60,
+        "align": 0,
+        "rotate": 0,
+        "full-at": 100,
+        "design-capacity": false,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-full": "{icon}  Full",
+        "format-alt": "{icon}  {time}",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "format-time": "{H}h {M}min",
+        "tooltip": true
+    },
+    "network": {
+        "format": "⚠ Disabled",
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "⚠ Disconnected",
+        "on-click-right": "alacritty -e nmtui",
+        "format-alt": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
+        "interval": 5
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": "󰖁 Muted",
+        "on-click": "pamixer -t",
+        "on-scroll-up": "pamixer -i 1",
+        "on-scroll-down": "pamixer -d 1",
+        "max-volume": 100,
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "󰕾",
+            "hands-free": "󰖁",
+            "headset": "󰕾",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "󰕾",
+                "󰕾",
+                "󰕾"
+            ]
+        },
+        "on-click-right": "pavucontrol"
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "tooltip": false,
+        "format-source": " {volume}%",
+        "format-source-muted": " Muted",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 1",
+        "on-scroll-down": "pamixer --default-source -d 1",
+        "scroll-step": 5
+    },
+    "custom/pacman": {
+        "format": " {}",
+        "interval": 7200,
+        "exec": "i=$(checkupdates); echo \"$i\" |wc -l; echo \"$i\" |column -t |tr '\n' '\r'",
+        "exec-if": "exit 0",
+        "on-click": "alacritty -e sudo pacman -Syu",
+        "signal": 8
+    },
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+    "custom/launcher": {
+        "format": " ",
+        "on-click": "exec nwg-drawer -c 7 -is 70 -spacing 23",
+        "tooltip": false
+    }
+}
